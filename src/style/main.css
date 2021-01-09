@@ -1,0 +1,112 @@
+/* Main Topbar */
+/* #main__topbar {
+  border: 1px solid #333;
+} */ /* Topbar title */
+.topbar__title {
+  margin-bottom: 2em;
+  color: #848383;
+}
+
+/* Top Bar info */
+.topbar__info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tested {
+  font-size: 18px;
+  line-height: 1.5em;
+  color: #154fd6;
+}
+
+select#countries {
+  appearance: none;
+  border: none;
+  padding: 12px 18px;
+  font-family: inherit;
+  font-size: 25px;
+  max-width: 150px;
+  background: #f2f2f2;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  font-weight: bold;
+  text-align-last: center;
+}
+
+select#countries:hover {
+  background: #dfdfdf;
+}
+
+/* Cards */
+
+#info-cards {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.info-card {
+  /* border: 1px solid red; */
+  padding: 1.4em 2em;
+  text-align: center;
+  flex-basis: 120px;
+  position: relative;
+  cursor: pointer;
+}
+
+.info-card__name {
+  text-transform: capitalize;
+}
+
+.info-card__main-value {
+  font-weight: 700;
+  font-size: 1.3em;
+}
+
+/* Animate card */
+.animate-card {
+  opacity: 0.2;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 14px;
+}
+
+/* Responsive  */
+@media (max-width: 700px) {
+  body {
+    padding: 0 !important;
+  }
+
+  /* top bar */
+  #main__topbar {
+    padding: 12px;
+  }
+
+  /* country select */
+  select#countries {
+    font-size: 20px;
+    padding: 8px;
+  }
+
+  /* info cards */
+  .info-card {
+    padding: 20px 0px;
+    font-size: 12px;
+    flex-basis: 25%;
+  }
+
+  .info-card__main-value {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .info-card__incremented {
+    display: none;
+  }
+}

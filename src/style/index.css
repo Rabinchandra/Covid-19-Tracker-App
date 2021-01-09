@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  padding: 2em;
+  font-family: 'Open Sans';
+}
+
+/* Remove blue highlight background on touch on mobile devices */
+
+@import url('main.css');
