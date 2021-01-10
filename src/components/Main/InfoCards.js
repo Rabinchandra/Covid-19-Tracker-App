@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import InfoCard from './InfoCard';
 
-function InfoCards() {
-  const data = [5, 10, 5, 6, 11, 15];
+function InfoCards({
+  selectedCountry,
+  globalInfo,
+  selectedCountryInfo,
+  history,
+}) {
+  const data = [1, 2, 3, 4, 6, -1, 3];
   const colors = {
     confirmed: '#cf2828',
     active: '#3571FE',
@@ -19,31 +24,39 @@ function InfoCards() {
       <InfoCard
         color={colors.confirmed}
         data={data}
-        name='confirmed'
+        typeName='confirmed'
         animateCardStyle={animateCardStyle}
         setAnimateCardStyle={setAnimateCardStyle}
         cardNumber={0}
+        info={selectedCountry === 'global' ? globalInfo : selectedCountryInfo}
+        history={history}
       />
       <InfoCard
         color={colors.active}
         data={data}
-        name='active'
+        typeName='active'
         setAnimateCardStyle={setAnimateCardStyle}
         cardNumber={1}
+        info={selectedCountry === 'global' ? globalInfo : selectedCountryInfo}
+        history={history}
       />
       <InfoCard
         color={colors.recovered}
         data={data}
-        name='recovered'
+        typeName='recovered'
         setAnimateCardStyle={setAnimateCardStyle}
         cardNumber={2}
+        info={selectedCountry === 'global' ? globalInfo : selectedCountryInfo}
+        history={history}
       />
       <InfoCard
         color={colors.deaths}
         data={data}
-        name='deaths'
+        typeName='deaths'
         setAnimateCardStyle={setAnimateCardStyle}
         cardNumber={3}
+        info={selectedCountry === 'global' ? globalInfo : selectedCountryInfo}
+        history={history}
       />
     </div>
   );

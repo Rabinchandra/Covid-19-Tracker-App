@@ -7,7 +7,26 @@ function App() {
   const [countriesInfo, setCountriesInfo] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('global');
   const [globalInfo, setGlobalInfo] = useState({});
-  const [histories, setHistories] = useState([]);
+  const [selectedCountryHistory, setSelectedCountryHistory] = useState([]);
+  const [selectedCountryInfo, setSelectedCountryInfo] = useState({});
+
+  const calculateTodayActive = (
+    active,
+    cases,
+    deaths,
+    recovered,
+    todayCases,
+    todayDeaths,
+    todayRecovered
+  ) => {
+    const yesterdayCases = cases - todayCases;
+    const yesterdayDeaths = deaths - todayDeaths;
+    const yesterdayRecovered = recovered - todayRecovered;
+    const yesterdayActive =
+      yesterdayCases - (yesterdayDeaths + yesterdayRecovered);
+
+    return active - yesterdayActive;
+  };
 
   // Set Countries name, Countries info
   useEffect(() => {
@@ -19,17 +38,40 @@ function App() {
         // Set Countries info
         setCountriesInfo(
           datas.map((data) => {
+            const {
+              country,
+              cases,
+              todayCases,
+              deaths,
+              todayDeaths,
+              recovered,
+              todayRecovered,
+              active,
+              countryInfo,
+              tests,
+            } = data;
+
             return {
-              country: data.country,
-              lat: data.countryInfo.lat,
-              long: data.countryInfo.long,
-              cases: data.cases,
-              todayCases: data.todayCases,
-              deaths: data.deaths,
-              todayDeaths: data.todayDeaths,
-              recovered: data.recovered,
-              todayRecovered: data.todayRecovered,
-              active: data.active,
+              country,
+              deaths,
+              todayDeaths,
+              recovered,
+              todayRecovered,
+              active,
+              tests,
+              lat: countryInfo.lat,
+              long: countryInfo.long,
+              confirmed: cases,
+              todayConfirmed: todayCases,
+              todayActive: calculateTodayActive(
+                active,
+                cases,
+                deaths,
+                recovered,
+                todayCases,
+                todayDeaths,
+                todayRecovered
+              ),
             };
           })
         );
@@ -41,22 +83,42 @@ function App() {
     fetch('https://disease.sh/v3/covid-19/all')
       .then((res) => res.json())
       .then((data) => {
+        const {
+          cases,
+          todayCases,
+          deaths,
+          todayDeaths,
+          recovered,
+          todayRecovered,
+          active,
+          tests,
+        } = data;
         setGlobalInfo({
           country: 'global',
           lat: 0,
           long: 0,
-          cases: data.cases,
-          todayCases: data.todayCases,
-          deaths: data.deaths,
-          todayDeaths: data.todayDeaths,
-          recovered: data.recovered,
-          todayRecovered: data.todayRecovered,
-          active: data.active,
+          confirmed: cases,
+          todayConfirmed: todayCases,
+          deaths,
+          todayDeaths,
+          recovered,
+          todayRecovered,
+          active,
+          tests,
+          todayActive: calculateTodayActive(
+            active,
+            cases,
+            deaths,
+            recovered,
+            todayCases,
+            todayDeaths,
+            todayRecovered
+          ),
         });
       });
   }, []);
 
-  // Set Countries' histories
+  // Set Countries' SelectedCountryHistory
   useEffect(() => {
     let country = selectedCountry === 'global' ? 'all' : selectedCountry;
 
@@ -64,19 +126,43 @@ function App() {
       .then((res) => res.json())
       .then((datas) => {
         if (country === 'all') {
-          setHistories(datas);
+          setSelectedCountryHistory({ country: 'global', ...datas });
         } else {
-          setHistories(datas.timeline);
+          setSelectedCountryHistory({
+            country: datas.country,
+            ...datas.timeline,
+          });
         }
-        console.log(datas);
       });
+  }, [selectedCountry]);
+
+  // Update Selected country info when selected country change
+  useEffect(() => {
+    const found = countriesInfo.find(
+      (country) =>
+        country.country.toLowerCase() === selectedCountry.toLowerCase()
+    );
+    setSelectedCountryInfo(found);
   }, [selectedCountry]);
 
   return (
     <div className='app'>
       <section className='app__main'>
-        <TopBar countries={countries} setSelectedCountry={setSelectedCountry} />
-        <InfoCards />
+        <TopBar
+          countries={countries}
+          setSelectedCountry={setSelectedCountry}
+          tests={
+            selectedCountry === 'global'
+              ? globalInfo.tests
+              : selectedCountryInfo?.tests
+          }
+        />
+        <InfoCards
+          selectedCountry={selectedCountry}
+          globalInfo={globalInfo}
+          selectedCountryInfo={selectedCountryInfo}
+          history={selectedCountryHistory}
+        />
       </section>
     </div>
   );

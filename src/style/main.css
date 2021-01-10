@@ -51,7 +51,7 @@ select#countries:hover {
   /* border: 1px solid red; */
   padding: 1.4em 2em;
   text-align: center;
-  flex-basis: 120px;
+  width: 160px;
   position: relative;
   cursor: pointer;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
+import numeral from 'numeral';
 
-function TopBar({ countries, setSelectedCountry }) {
+function TopBar({ countries, setSelectedCountry, tests }) {
   return (
     <div id='main__topbar'>
       {/* Title */}
@@ -11,7 +12,7 @@ function TopBar({ countries, setSelectedCountry }) {
       <div className='topbar__info'>
         <section className='tested'>
           <span>Tested</span> <br />
-          <strong>140,203,910</strong>
+          <strong>{numeral(tests).format('0,0')}</strong>
         </section>
 
         <section
