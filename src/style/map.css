@@ -1,0 +1,16 @@
+#main__map {
+  margin-top: 50px;
+  border-radius: 12px;
+  /* border: 1px solid red; */
+  overflow: hidden;
+}
+
+.leaflet-interactive {
+  transition: 0.3s;
+  transition-property: fill-opacity;
+  stroke-width: 2;
+}
+
+.leaflet-interactive:hover {
+  fill-opacity: 0.5;
+}

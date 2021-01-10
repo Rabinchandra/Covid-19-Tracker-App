@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import InfoCards from './components/Main/InfoCards';
-import TopBar from './components/Main/TopBar';
+import InfoCards from './components/main/InfoCards';
+import TopBar from './components/main/TopBar';
+import Map from './components/main/Map';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -9,7 +10,16 @@ function App() {
   const [globalInfo, setGlobalInfo] = useState({});
   const [selectedCountryHistory, setSelectedCountryHistory] = useState([]);
   const [selectedCountryInfo, setSelectedCountryInfo] = useState({});
+  const [selectedType, setSelectedType] = useState('confirmed');
 
+  const colors = {
+    confirmed: '#cf2828',
+    active: '#3571FE',
+    recovered: '#0ADB49',
+    deaths: '#848383',
+  };
+
+  // Calculate Today's incremented Active
   const calculateTodayActive = (
     active,
     cases,
@@ -145,6 +155,15 @@ function App() {
     setSelectedCountryInfo(found);
   }, [selectedCountry]);
 
+  useEffect(() => {
+    if (countriesInfo.length) {
+      // Sort Countries by selected Type in descending order
+      setCountriesInfo(
+        countriesInfo.sort((a, b) => b[selectedType] - a[selectedType])
+      );
+    }
+  }, [selectedType, countriesInfo]);
+
   return (
     <div className='app'>
       <section className='app__main'>
@@ -162,6 +181,13 @@ function App() {
           globalInfo={globalInfo}
           selectedCountryInfo={selectedCountryInfo}
           history={selectedCountryHistory}
+          colors={colors}
+          setSelectedType={setSelectedType}
+        />
+        <Map
+          countriesInfo={countriesInfo}
+          selectedType={selectedType}
+          colors={colors}
         />
       </section>
     </div>

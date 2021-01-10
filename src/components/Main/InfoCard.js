@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, animate } from 'framer-motion';
 import { Sparklines, SparklinesSpots, SparklinesLine } from 'react-sparklines';
 import { capitalize } from '../../utilities';
 import numeral from 'numeral';
@@ -12,6 +12,7 @@ function InfoCard({
   cardNumber,
   info,
   history,
+  setSelectedType,
 }) {
   const changeAnimateCardStyle = () => {
     // Change Animate Card style
@@ -21,6 +22,7 @@ function InfoCard({
     });
   };
 
+  // Get Active History
   const getActiveHistory = () => {
     const confirmedHistory = Object.values(history.cases || {});
     const deathsHistory = Object.values(history.deaths || {});
@@ -59,12 +61,24 @@ function InfoCard({
     }
   };
 
+  // Get Today's incremented value i.e. incremented cases, death, active & recovered
+  const getTodayIncremented = () => {
+    if (info) {
+      const value = info[`today${capitalize(typeName)}`];
+      return value > 0 ? numeral(value).format('+0,0') : '+0';
+    }
+    return '+0';
+  };
+
   return (
     <section
       className={`info-card`}
       style={{ color: color }}
-      onClick={changeAnimateCardStyle}>
-      {/* Animate card show if animateStyle is defined*/}
+      onClick={() => {
+        changeAnimateCardStyle();
+        setSelectedType(typeName);
+      }}>
+      {/* Animate card show if animateStyle is defined */}
       {animateCardStyle ? (
         <motion.div
           className='animate-card'
@@ -72,13 +86,10 @@ function InfoCard({
       ) : (
         ''
       )}
+
       {/* Card infomations */}
       <strong className='info-card__name'>{typeName}</strong>
-      <p className='info-card__incremented'>
-        {info
-          ? numeral(info[`today${capitalize(typeName)}`]).format('+0,0')
-          : ''}
-      </p>
+      <p className='info-card__incremented'>{getTodayIncremented()}</p>
       <p className='info-card__main-value'>
         {info ? numeral(info[typeName]).format('0, 0') : ''}
       </p>
