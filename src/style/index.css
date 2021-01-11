@@ -2,15 +2,33 @@
 
 * {
   box-sizing: border-box;
+  /* Remove blue highlight background on touch on mobile devices */
   -webkit-tap-highlight-color: transparent;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 body {
   margin: 0;
-  padding: 2em;
   font-family: 'Open Sans';
 }
 
-/* Remove blue highlight background on touch on mobile devices */
+.app {
+  display: flex;
+}
+
+.app__main {
+  flex: 1;
+  padding: 2em;
+}
+
+@media (max-width: 1100px) {
+  .app {
+    display: block;
+  }
+}
 
 @import url('main.css');
+@import url('sideinfo.css');

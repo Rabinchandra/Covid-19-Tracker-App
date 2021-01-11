@@ -1,0 +1,29 @@
+#live-cases-list-container {
+  padding: 1em 2em;
+  color: rgb(82, 82, 82);
+  height: 100vh;
+}
+
+#live-cases-list-container .heading {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+ul.live-cases-list {
+  list-style-type: none;
+  padding: 0;
+  height: 80vh;
+  overflow: scroll;
+}
+
+ul.live-cases-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 10px;
+  font-weight: 700;
+}
+
+ul.live-cases-list li:nth-child(odd) {
+  background: #f5f5f5;
+  border-radius: 6px;
+}

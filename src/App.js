@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import InfoCards from './components/main/InfoCards';
 import TopBar from './components/main/TopBar';
 import Map from './components/main/Map';
+import LiveCasesList from './components/sideinfo/LiveCasesList';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -71,6 +72,7 @@ function App() {
               tests,
               lat: countryInfo.lat,
               long: countryInfo.long,
+              flag: countryInfo.flag,
               confirmed: cases,
               todayConfirmed: todayCases,
               todayActive: calculateTodayActive(
@@ -188,7 +190,11 @@ function App() {
           countriesInfo={countriesInfo}
           selectedType={selectedType}
           colors={colors}
+          selectedCountry={selectedCountry}
         />
+      </section>
+      <section className='app__sideInfo'>
+        <LiveCasesList countriesInfo={countriesInfo} />
       </section>
     </div>
   );
