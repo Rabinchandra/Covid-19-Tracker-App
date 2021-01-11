@@ -168,34 +168,40 @@ function App() {
 
   return (
     <div className='app'>
-      <section className='app__main'>
-        <TopBar
-          countries={countries}
-          setSelectedCountry={setSelectedCountry}
-          tests={
-            selectedCountry === 'global'
-              ? globalInfo.tests
-              : selectedCountryInfo?.tests
-          }
-        />
-        <InfoCards
-          selectedCountry={selectedCountry}
-          globalInfo={globalInfo}
-          selectedCountryInfo={selectedCountryInfo}
-          history={selectedCountryHistory}
-          colors={colors}
-          setSelectedType={setSelectedType}
-        />
-        <Map
-          countriesInfo={countriesInfo}
-          selectedType={selectedType}
-          colors={colors}
-          selectedCountry={selectedCountry}
-        />
-      </section>
-      <section className='app__sideInfo'>
-        <LiveCasesList countriesInfo={countriesInfo} />
-      </section>
+      <div className='app__container'>
+        <section className='app-container__main'>
+          <TopBar
+            countries={countries}
+            setSelectedCountry={setSelectedCountry}
+            tests={
+              selectedCountry === 'global'
+                ? globalInfo.tests
+                : selectedCountryInfo?.tests
+            }
+          />
+          <InfoCards
+            selectedCountry={selectedCountry}
+            globalInfo={globalInfo}
+            selectedCountryInfo={selectedCountryInfo}
+            history={selectedCountryHistory}
+            colors={colors}
+            setSelectedType={setSelectedType}
+          />
+          <Map
+            countriesInfo={countriesInfo}
+            selectedType={selectedType}
+            colors={colors}
+            selectedCountry={selectedCountry}
+          />
+        </section>
+        <section className='app-container__sideInfo'>
+          <LiveCasesList countriesInfo={countriesInfo} />
+        </section>
+      </div>
+
+      <footer className='app__footer'>
+        <div>Web Designed by Rabin</div>
+      </footer>
     </div>
   );
 }

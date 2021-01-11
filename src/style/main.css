@@ -80,7 +80,7 @@ select#countries:hover {
 
 /* Responsive  */
 @media (max-width: 700px) {
-  .app__main {
+  .app-container__main {
     padding: 0 !important;
   }
 

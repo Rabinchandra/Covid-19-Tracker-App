@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import '../../style/map.css';
 import numeral from 'numeral';
 
 function Map({ selectedType, countriesInfo, colors, selectedCountry }) {
