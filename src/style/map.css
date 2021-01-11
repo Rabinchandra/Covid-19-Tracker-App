@@ -3,6 +3,8 @@
   border-radius: 12px;
   /* border: 1px solid red; */
   overflow: hidden;
+  padding: 2em 0em;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
 .leaflet-interactive {
@@ -14,3 +16,7 @@
 .leaflet-interactive:hover {
   fill-opacity: 0.5;
 }
+
+/* @media (max-width: 900px) {
+
+} */

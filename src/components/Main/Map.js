@@ -68,7 +68,8 @@ function Map({ selectedType, countriesInfo, colors, selectedCountry }) {
 
 const mapStyle = {
   width: '100%',
-  height: '400px',
+  height: '500px',
+  // borderRadius: '12px',
 };
 
 const flagStyle = {
