@@ -49,6 +49,10 @@ function Map({ selectedType, countriesInfo, colors, selectedCountry }) {
                     .format('0.0a')
                     .toUpperCase()}{' '}
                   <br />
+                  {/* Recovered */}
+                  <strong>Recovered: </strong>
+                  {numeral(countryInfo.recovered).format('0.0a').toUpperCase()}
+                  <br />
                   {/* Deaths cases */}
                   <strong>Deaths: </strong>
                   {numeral(countryInfo.deaths).format('0.0a').toUpperCase()}
